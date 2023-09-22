@@ -1,10 +1,10 @@
 FROM ubuntu:22.04
 RUN     apt-get update && \
         apt-get dist-upgrade -y
-RUN     apt-get install -y  python3-pip
+RUN     apt-get install -y python3-pip
 
 # include drivers from CUDA
-
+RUN     apt-get install -y software-properties-common
 RUN     add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
 RUN     apt-get update
 RUN     apt upgrade
