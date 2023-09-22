@@ -20,7 +20,8 @@ RUN     apt-get update
 RUN     add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
 RUN     apt-get update
 RUN     apt upgrade
-RUN     apt install -y --allow-unauthenticated cuda-drivers-fabricmanager-525
+# RUN     apt install -y --allow-unauthenticated cuda-drivers-fabricmanager-525
+RUN     apt install -y nvidia-driver-525
 
 # tools
 
