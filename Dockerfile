@@ -1,16 +1,22 @@
 FROM ubuntu:22.04
-RUN apt-get update && \
-    apt-get dist-upgrade -y
-RUN apt-get install -y \
-      python3-pip \
-      wget \
-      ;
+RUN     apt-get update && \
+        apt-get dist-upgrade -y
+RUN     apt-get install -y  python3-pip
 
-# include some tools for the interactive container
-RUN     apt-get install -y less rsync vim nano tree file
+# include drivers from CUDA
+
+RUN     add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
+RUN     apt-get update
+RUN     apt upgrade
+RUN     apt install -y cuda-drivers-fabricmanager-535
+
+# tools
+
+RUN     apt-get install -y less rsync vim nano tree file wget
 
 ADD     . /.
 WORKDIR /.
+
 RUN 	CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip3 install llama-cpp-python torch torchvision torchaudio transformers --force-reinstall --upgrade --no-cache-dir
 RUN     CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip3 install -r requirements.txt --force-reinstall --upgrade --no-cache-dir; find /root/.cache/pip/ -type f -delete
 
