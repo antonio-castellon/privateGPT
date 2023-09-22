@@ -129,7 +129,7 @@ Build image
 `docker build . -t private_gpt`
 
 Run image
-`docker run --gpus=all --cap-add SYS_RESOURCE -e USE_MLOCK=0 -e MODEL=/models/<your_model_file> -v /models:/models -t cuda_simple`
+`docker run --gpus=all --cap-add SYS_RESOURCE -e USE_MLOCK=0 -e MODEL=/models/<your_model_file> -v /models:/models -t private_gpt`
 
 
 # System Requirements
