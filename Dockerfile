@@ -3,8 +3,20 @@ RUN     apt-get update && \
         apt-get dist-upgrade -y
 RUN     apt-get install -y python3-pip
 
+# Set non-interactive frontend for package installations
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set the keyboard layout to "US" (QWERTY)
+RUN apt-get update && apt-get install -y keyboard-configuration && \
+    echo "keyboard-configuration  keyboard-configuration/layout select us" | debconf-set-selections && \
+    dpkg-reconfigure keyboard-configuration && \
+    apt-get clean
+
+
 # include drivers from CUDA
 RUN     apt-get install -y software-properties-common
+RUN     apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
+RUN     apt-get update
 RUN     add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
 RUN     apt-get update
 RUN     apt upgrade
