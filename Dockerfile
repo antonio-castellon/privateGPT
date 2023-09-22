@@ -5,7 +5,8 @@ RUN     apt-get install -y python3-pip
 
 # include drivers from CUDA
 RUN     apt-get install -y software-properties-common
-RUN     apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub
+RUN     echo 'deb [trusted=yes] http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/' > /etc/apt/sources.list.d/cuda.list
+RUN     apt-get update
 RUN     add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
 RUN     apt-get update
 RUN     apt upgrade
