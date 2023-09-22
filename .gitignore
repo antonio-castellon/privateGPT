@@ -171,3 +171,4 @@ cython_debug/
 
 .vscode/launch.json
 persist_directory/chroma.sqlite3
+/.idea/
